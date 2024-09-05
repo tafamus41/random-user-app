@@ -9,11 +9,16 @@ import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
 import Footer from "./components/footer/Footer";
+import axios from "axios";
 
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
+
+  const data= async()=>{
+axios()
+  }
   return (
     <main>
       <div className="block bcg-orange">
