@@ -16,6 +16,7 @@ const url = "https://randomuser.me/api/";
 function App() {
   const [people, setPeople] = useState([]);
   const [userValue, setUserValue] = useState("");
+  const [userTitle, setUserTitle] = useState("name");
   const [addUser, setAddUser] = useState([]);
 
   const handleAddUser = () => {
@@ -30,11 +31,14 @@ function App() {
     ]);
   };
 
-  const handleUserValue = (value) => setUserValue(value);
+  const handleUserValue = (title,value) => {
+    setUserTitle(title)
+    setUserValue(value)};
 
   const getBilgiler = async () => {
     const res = await axios.get(url);
     setPeople(res.data.results);
+    setUserTitle("name")
     setUserValue(
       `${res.data.results[0].name.title} ${res.data.results[0].name.first} ${res.data.results[0].name.last}`
     );
@@ -64,12 +68,12 @@ function App() {
           }) => (
             <div key={cell} className="container">
               <img src={picture.large} alt="random user" className="user-img" />
-              <p className="user-title">My is</p>
+              <p className="user-title">My {userTitle} is</p>
               <p className="user-value">{userValue}</p>
               <div className="values-list">
                 <button
                   onMouseOver={() =>
-                    handleUserValue(`${name.title} ${name.first} ${name.last}`)
+                    handleUserValue("name",`${name.title} ${name.first} ${name.last}`)
                   }
                   className="icon"
                   data-label="name"
@@ -83,12 +87,12 @@ function App() {
                 <button
                   className="icon"
                   data-label="email"
-                  onMouseOver={() => handleUserValue(email)}
+                  onMouseOver={() => handleUserValue("email",email)}
                 >
                   <img src={mailSvg} alt="mail" id="iconImg" />
                 </button>
                 <button
-                  onMouseOver={() => handleUserValue(dob.age)}
+                  onMouseOver={() => handleUserValue("age",dob.age)}
                   className="icon"
                   data-label="age"
                 >
@@ -100,7 +104,7 @@ function App() {
                 </button>
                 <button
                   onMouseOver={() =>
-                    handleUserValue(
+                    handleUserValue("street",
                       `${location.street.number} ${location.street.name}`
                     )
                   }
@@ -110,14 +114,14 @@ function App() {
                   <img src={mapSvg} alt="map" id="iconImg" />
                 </button>
                 <button
-                  onMouseOver={() => handleUserValue(phone)}
+                  onMouseOver={() => handleUserValue("phone",phone)}
                   className="icon"
                   data-label="phone"
                 >
                   <img src={phoneSvg} alt="phone" id="iconImg" />
                 </button>
                 <button
-                  onMouseOver={() => handleUserValue(login.password)}
+                  onMouseOver={() => handleUserValue("password",login.password)}
                   className="icon"
                   data-label="password"
                 >
