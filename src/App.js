@@ -18,13 +18,14 @@ function App() {
   const [people, setPeople] = useState([]);
   const [userValue, setUserValue] = useState("")
   // console.log(people[0].name.title);
-  const handleUserValue=(e)=>setUserValue(e.target.value)
+  const handleUserValue=(value)=>setUserValue(value)
  
   // console.log(people.name);
   const getBilgiler = async () => {
     const res = await axios.get(url);
     // console.log(res.data.results);
     setPeople(res.data.results);
+    setUserValue(`${res.data.results[0].name.title} ${res.data.results[0].name.first} ${res.data.results[0].name.last}`)
   };
   //
 
@@ -38,36 +39,37 @@ function App() {
         <img src={cwSvg} alt="cw" id="cw" />
       </div>
       <div className="block">
-        {people.map(({cell,email,location,name,phone,registered,picture,login,gender}) => (
+        {people.map(({cell,email,location,name,phone,registered,picture,login,gender,dob}) => (
           <div key={cell} className="container">
             <img src={picture.large} alt="random user" className="user-img" />
-            <p className="user-title">My name is</p>
+            <p className="user-title">My is</p>
             <p className="user-value">{userValue}</p>
             <div className="values-list">
-              <button  className="icon" data-label="name" >
+              <button onMouseOver={()=>handleUserValue(`${name.title} ${name.first} ${name.last}`)} className="icon" data-label="name" >
                 <img src={gender==="female" ? womanSvg:manSvg} alt="user" id="iconImg" />
               </button>
-              <button onMouseOver={(e)=>handleUserValue(e)} className="icon" data-label="email" value={email}>
+              <button  className="icon" data-label="email" onMouseOver={() => handleUserValue(email)}>
                 <img src={mailSvg} alt="mail" id="iconImg" />
               </button>
-              <button className="icon" data-label="age">
+              <button onMouseOver={() => handleUserValue(dob.age)}
+ className="icon" data-label="age">
                 <img src={gender==="female" ? womanAgeSvg:manAgeSvg} alt="age" id="iconImg" />
               </button>
-              <button className="icon" data-label="street">
+              <button onMouseOver={() => handleUserValue(`${location.street.number} ${location.street.name}`)} className="icon" data-label="street">
                 <img src={mapSvg} alt="map" id="iconImg" />
               </button>
-              <button className="icon" data-label="phone">
+              <button onMouseOver={() => handleUserValue(phone)} className="icon" data-label="phone">
                 <img src={phoneSvg} alt="phone" id="iconImg" />
               </button>
-              <button className="icon" data-label="password">
+              <button onMouseOver={() => handleUserValue(login.password)} className="icon" data-label="password">
                 <img src={padlockSvg} alt="lock" id="iconImg" />
               </button>
             </div>
             <div className="btn-group">
-              <button className="btn" type="button">
+              <button className="btn" type="button" onClick={getBilgiler}>
                 new user
               </button>
-              <button className="btn" type="button">
+              <button className="btn" type="button" >
                 add user
               </button>
             </div>
@@ -83,6 +85,10 @@ function App() {
               </thead>
               <tbody>
                 <tr className="body-tr"></tr>
+                {/* <td>{name.first}</td>
+                  <td>{email}</td>
+                  <td>{phone}</td>
+                  <td>{dob.age}</td> */}
               </tbody>
             </table>
           </div>
