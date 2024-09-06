@@ -16,10 +16,14 @@ const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
   const [people, setPeople] = useState([]);
+  const [userValue, setUserValue] = useState("")
+  // console.log(people[0].name.title);
+  const handleUserValue=(e)=>setUserValue(e.target.value)
+ 
   // console.log(people.name);
   const getBilgiler = async () => {
     const res = await axios.get(url);
-    console.log(res.data.results);
+    // console.log(res.data.results);
     setPeople(res.data.results);
   };
   //
@@ -38,12 +42,12 @@ function App() {
           <div key={cell} className="container">
             <img src={picture.large} alt="random user" className="user-img" />
             <p className="user-title">My name is</p>
-            <p className="user-value">{name.title} {name.first} {name.last}</p>
+            <p className="user-value">{userValue}</p>
             <div className="values-list">
-              <button className="icon" data-label="name">
+              <button  className="icon" data-label="name" >
                 <img src={gender==="female" ? womanSvg:manSvg} alt="user" id="iconImg" />
               </button>
-              <button className="icon" data-label="email">
+              <button onMouseOver={(e)=>handleUserValue(e)} className="icon" data-label="email" value={email}>
                 <img src={mailSvg} alt="mail" id="iconImg" />
               </button>
               <button className="icon" data-label="age">
