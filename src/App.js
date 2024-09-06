@@ -12,7 +12,7 @@ import Footer from "./components/footer/Footer";
 import axios from "axios";
 
 const url = "https://randomuser.me/api/";
-const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
+// const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
   const [people, setPeople] = useState([]);

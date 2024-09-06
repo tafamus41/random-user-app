@@ -22,7 +22,7 @@ function App() {
   const getBilgiler = async () => {
     const res = await axios.get(url);
     setPeople(res.data.results);
-    setUserValue(`${res.data.results[0].name.first} ${res.data.results[0].name.last}`); // Set initial name
+    setUserValue(`${res.data.results[0].name.first} ${res.data.results[0].name.last}`); 
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
         {people.map(({ cell, email, location, name, phone, registered, picture, login, gender, dob }) => (
           <div key={cell} className="container">
             <img src={picture.large} alt="random user" className="user-img" />
-            <p className="user-title">My {userValue.includes("is") ? "name" : ""} is</p>
+            <p className="user-title">My ... is</p>
             <p className="user-value">{userValue}</p>
             <div className="values-list">
               <button
