@@ -18,10 +18,11 @@ function App() {
   const [userValue, setUserValue] = useState("");
 
   const handleUserValue = (value) => setUserValue(value);
-
+  
   const getBilgiler = async () => {
     const res = await axios.get(url);
     setPeople(res.data.results);
+   
     setUserValue(`${res.data.results[0].name.first} ${res.data.results[0].name.last}`); 
   };
 
