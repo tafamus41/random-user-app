@@ -47,7 +47,7 @@ function App() {
                 <img src={mailSvg} alt="mail" id="iconImg" />
               </button>
               <button className="icon" data-label="age">
-                <img src={womanAgeSvg} alt="age" id="iconImg" />
+                <img src={gender==="female" ? womanAgeSvg:manAgeSvg} alt="age" id="iconImg" />
               </button>
               <button className="icon" data-label="street">
                 <img src={mapSvg} alt="map" id="iconImg" />
